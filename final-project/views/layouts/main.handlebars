@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/public/css/main.css">
+  <title>Final Project</title>
+
+
+</head>
+<div class = "navtop">
+
+    <a class = "topText" href="/show/getShows">All TV Shows</a>
+
+    <a class = "topText" href="/show/description">Project Description</a>
+
+</div>
+
+<div id = "top">
+{{#if name}}
+<center><h1>{{name}}</h1></center>
+{{else}}
+<center><h1>Show</h1></center>
+{{/if}}
+</div>
+
+
+<center>
+  <div class="nav">
+
+    <a>
+      <div class = "tag">
+    <label  for="genres">Find Genre:</label>
+      <input onchange="javascript:handleSelect(this)" type="text" name="genre" size="10" placeholder="Genre..."></textarea>
+    </div>
+     </a>
+
+     <a>
+       <div class = "tag">
+     <label  for="years">Find Year:</label>
+       <input  onchange="javascript:handleSelect1(this)" type="text" name="year" size="10" placeholder="Year..."></textarea>
+     </div>
+
+      </a>
+
+      <a  id="createNew" onclick="window.location.href = '/show/addShow';">
+        <div class = "tag">
+
+      <label for="newShow">Add Show</label>
+    </div>
+       </a>
+
+      <select  onchange="javascript:handleSelect4(this)">
+        <option value="">Delete Show</option>
+        {{#each data}}
+        <option value={{this._id}}>{{this.title}}</option>
+        {{/each}}
+      </select>
+      <select  onchange="javascript:handleSelect3(this)">
+        <option value="">Write Review</option>
+        {{#each data}}
+        <option value={{this._id}}>{{this.title}}</option>
+        {{/each}}
+      </select>
+       <select  onchange="javascript:handleSelect2(this)">
+         <option value="">Show's Review</option>
+         {{#each data}}
+         <option value={{this._id}}>{{this.title}}</option>
+         {{/each}}
+       </select>
+       <select  onchange="javascript:handleSelect5(this)">
+         <option value="">Delete Review</option>
+         {{#each data}}
+         <option value={{this._id}}>{{this.title}}</option>
+         {{/each}}
+       </select>
+       <select  onchange="javascript:handleSelect6(this)">
+         <option value="">Tweets</option>
+         {{#each data}}
+         
+         <option value={{noSpace this.title}}>{{this.title}}</option>
+         {{/each}}
+       </select>
+
+       <select  onchange="javascript:handleSelect7(this)">
+         <option value="">Videos</option>
+         {{#each data}}
+
+         <option value={{noSpace this.title}}>{{this.title}}</option>
+         {{/each}}
+       </select>
+ </center>
+    </div>
+
+<body>
+    {{{body}}}
+    <script src="/socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script>
+
+        var socket = io();
+
+
+        $('#shows').submit(function() { //When "post" button is pressed
+            var title = $('#title').val();
+            var year = $('#year').val();
+            var genre = $('#genre').val();
+            $('#title').val('');
+            $('#year').val('');
+            $('#genre').val('');
+            $.ajax({
+                type: "POST",
+                url: '/show/addShow',
+                data: {
+                    title: title,
+                    year: year,
+                    genre: genre
+                },
+                success: function(data, status) {
+                    console.log(data);
+                }
+            });
+            return false; //Ensures the page does not reload
+        });
+        //
+        // //Task 2 - Step 2: Listen for message from server when some client creates a new movie
+        socket.on('new show', function(show) {
+          $('#showList').append($('<h2>').text(show.title));
+          $('#showList').append($('<h2>'));
+          $('#showList').append($('<p>').text("Release Year: " + show.year));
+          $('#showList').append($('<p>').text("Genre: " + show.genre));
+
+        })
+
+
+
+	</script>
+</body>
+</html>

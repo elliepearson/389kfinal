@@ -1,0 +1,73 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+<script>
+
+$('#createNew').on('click', function() {
+	console.log("createNewShow");
+});
+function handleSelect(elm)
+{
+window.location = "/show/genre/" + elm.value;
+}
+
+function handleSelect1(elm)
+{
+window.location = "/show/year/" + elm.value;
+}
+
+function handleSelect2(elm)
+{
+// console.log(loc);
+window.location = "/show/" + elm.value + "/reviews";
+}
+
+function handleSelect3(elm)
+{
+// console.log(loc);
+window.location = "/show/" + elm.value + "/newReview";
+}
+
+
+function handleSelect4(elm)
+{
+// console.log(loc);
+window.location = "/show/" + elm.value;
+}
+
+function handleSelect5(elm)
+{
+
+window.location = "/show/" + elm.value + "/review/delete";
+}
+
+function handleSelect6(elm)
+{
+
+window.location = "/show/tweets/" + elm.value;
+}
+function handleSelect7(elm)
+{
+
+window.location = "/show/youtube/" + elm.value;
+}
+</script>
+<body>
+<center>
+<div class = "description">
+<h4>By Ellen Pearson</h4>
+<p> This project is designed to collect data about popular television shows. <br>
+		<code>Find Genre</code> finds all the TV shows that are categorized as that genre on user input <br>
+		<code>Find Year</code> finds all the TV shows that started in the year the user inputs  <br>
+		<code>Add Show</code> inputs a show with its title, year and genre <br>
+		<code>Delete Show</code> deletes a show from the drop-down menu <br>
+		<code>Write Review</code> inputs a show's review with a rating, comment and author corresponding to user input <br>
+		<code>Show's Review</code> collects all the reviews from the corresponding show <br>
+		<code>Delete Review</code> deletes the last review from the show according to user input <br>
+		<code>Tweets</code> uses the Twitter npm package to grab 50 tweets about the show of the user's choice <br>
+		<code>Videos</code> finds five shows using the Youtube Search npm package about the show
+
+		</menu>
+</p>
+</div>
+</center>
+</body>
