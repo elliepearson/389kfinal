@@ -1,0 +1,71 @@
+<script>
+
+$('#createNew').on('click', function() {
+	console.log("createNewShow");
+});
+function handleSelect(elm)
+{
+window.location = "/show/genre/" + elm.value;
+}
+
+function handleSelect1(elm)
+{
+window.location = "/show/year/" + elm.value;
+}
+
+function handleSelect2(elm)
+{
+// console.log(loc);
+window.location = "/show/" + elm.value + "/reviews";
+}
+
+function handleSelect3(elm)
+{
+// console.log(loc);
+window.location = "/show/" + elm.value + "/newReview";
+}
+
+
+function handleSelect4(elm)
+{
+// console.log(loc);
+window.location = "/show/" + elm.value;
+}
+
+function handleSelect5(elm)
+{
+
+window.location = "/show/" + elm.value + "/review/delete";
+}
+
+function handleSelect6(elm)
+{
+
+window.location = "/show/tweets/" + elm.value;
+}
+function handleSelect7(elm)
+{
+window.location = "/show/youtube/" + elm.value;
+}
+
+</script>
+<body>
+	<br>
+<article>
+  <form id="shows">
+    <div class="input-field">
+      <label>Show Title:</label>
+      <input id = "title" type="text" name="title" size="50" placeholder="Show Title...">
+    </div>
+    <div class="input-field">
+      <label>Release Year:</label>
+      <input id = "year" type="number" name="year" size="50" placeholder="Year..."></textarea>
+    </div>
+    <div class="input-field">
+      <label>Genre:</label>
+      <input id = "genre" type="text" name="genre" size="50" placeholder="Genre..."></textarea>
+    </div>
+		<button onclick="location.href='/show/getShows';">POST</button>
+  </form>
+</article>
+</body>
