@@ -8,7 +8,7 @@ Date: 5/2/2020
 
 Project Topic: Popular TV Shows
 
-URL:
+URL: https://final-project-tv.herokuapp.com/
 
 ---
 
@@ -31,7 +31,8 @@ Schema for TV Show:
 {
     title: String,
     year: Number,
-    genre: String
+    genre: String,
+    reviews: [String]
 }
 ```
 
@@ -51,6 +52,8 @@ Schema for Review:
 HTML form route: `/addShow`
 
 POST endpoint route: `/show/addShow`
+
+Uses socket.io so that users can see added show in real time
 
 Example Node.js POST request to endpoint:
 ```javascript

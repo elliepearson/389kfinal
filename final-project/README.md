@@ -1,86 +1,68 @@
 # Final Project
 #### Out: 4/13/20 | Deadline: 5/8/20 11:59 PM
 
-### Overview
+### Description of the project
 
-In this project, you will work on a project to tie together everything you have learned up to now in the semester.
+This project is designed to take information about shows and allow users to write reviews about them. It uses sockets when adding shows so that users can see them in real time. Users have the ability to add shows, delete show, add reviews for a specific show and delete the latest review of a show. They are able to categorize the shows by genre and by year.
 
-### Objectives
-
-The purpose of this project is to create a fully functioning **"real-time application"**.
-
-This project is largely open ended. The only requirement is to satisfy all parts of the `Specifications` section below, which are broad and flexible. Outside of that, you are free to be creative and make something you are proud of. You may choose to do the same topic as you did for your midterm, or choose something different.
-
-### Grading
-
-You fill submit both the application source as well as a `documentation.md` file that documents how you implemented each part of the project.
-
-Grading will be done using the `documentation.md` file to test your application.
-
-Each specificiation has two types of requirements:
-- (REQ): These are requirements **must** be followed. Failue to do so can result in up to 50% point deductions for the entire project.
-- (X pt): These specifications are worth X points.
+### GET Requests
 
 
-### Specifications
+1. "/" -> displays all shows and navigation bar
+
+2. "/show/description" -> displays the description of the program
+
+3. "/show/youtube/:show" -> using the youtube-search npm package, gets 5 youtube videos with the name of the show in the title
+
+4. "/show/tweets/:id" -> using the Twitter npm package, finds 50 tweets with the show title in the tweets
+
+5. "/show/getShows" -> displays all the shows, with their title, year and genre
+
+6. "/show/genre/:genre_type" -> gets all the shows with the specified genre
+
+7. "/show/year/:year" -> returns all the shows that started in that year
+
+8. "/show/:id/reviews" -> shows all the reviews for a specified show
+
+### DELETE Requests
+
+1. "/show/:id" -> deletes specific show using the id
+
+2. "/show/:id/review/delete" -> deletes a show's latest review
+
+### POST Requests
+
+1. "/show/addShow" -> adds a show using sockets with title, year and genre
+
+2. "/show/:id/newReview" -> adds a review to a show using the id of the show
 
 
-1. **Fulfillment of Midterm Project Requirements**
+### Handlebars pages
 
-    - (REQ) (50 pt) Data should be stored using MongoDB, instead of similar to how the Pokemon API and the blog engine was set up
-    - Have at least 2 different schemas
+1. main.handlebars -> creates navigation bar and handles socket.io
+
+2. home.handlebars -> displays all the shows or shows of a specific year
+
+3. create.handlebars -> form that allows user to input show
+
+4. apis.handlebars -> displays the content from the youtube-search and twitter npm packages
+
+5. review.handlebars -> form that allows user to input review for a show
+
+6. shows.handlebars -> displays all  the reviews for a show
+
+7. genre.handlebars -> displays all the shows of a specific genre with just the title and year
+
+8. description.handlebars -> shows the description of the project and my name
 
 
-2. **Live Updates**
+### Modules
 
-    Users will need to be able to add data to your local storage, and have live updates and a notification system.
+1. exports schema from TVShow.js in models folder to index.js
 
-    - (10 pt) Incorporate sockets.
 
-3. **View Data**
+### NPM packages
 
-    Users should be able to view all data in two ways:
+1. Twitter npm package
 
-    - (REQ) The HTML pages should be generated using Handlebars
-    - (10 pt) Handlebars.js should be used to generate at least 5 pages,
-              including a form submission page for your respective entity
-    - (5 pt) Have a (6th) description about page, which includes your name
-        and description of the application.
-
-4. **API**
-
-    Use express.js to have at least 8 different endpoints
-
-    - (10 pt) At least 2 post endpoints
-    - (10 pt) At least 2 delete endpoints
-
-4. **Modules**
-
-    Create at least 1 module (to separate functionality from backend API functionality)
-
-    - (15 pt) Create at least 1 module
-
-5. **NPM Packages**
-
-    - (15 pt) Use 2 new npm packages that we have not used before
-
-6. **User Interface**
-
-    - (10 pt) Make it look nice
-
-7. **Deployment**
-
-    - (5 pt) Deploy to the web (either Heroku or Now) - If you can't figure out
-    deployment, email us and we'll figure something out
-
-8. **README**
-
-    - (5 pt) Create a README with all the specifications
-
-### Submission
-
-We will be Heroku [Heroku](http://heroku.com) to submit one link per project.
-
-At the top of your project, include the **Heroku link** (ex: https://myapp.herokuapp.com) at the top of your `documentation.md` file.
-
-Submit just the `documentation.md` file to the submit server.
+2. youtube-search npm package

@@ -53,20 +53,6 @@ var opts = {
 
 let ids = {};
 
-// var hbs = exphbs.create({});
-
-// Handlebars.registerHelper('noSpace', function (value) {
-//   return value.split(" ").join("");
-// });
-// hbs.registerHelper('nospace', function (value) {
-//   return value.split(" ").join("");
-// });
-
-
-// hbs.handlebars.registerHelper('link', function (value) {
-//   return "https://www.youtube.com/embed/" + value;
-// });
-
 
 app.get('/',function(req,res){
   TVShow.find({}, function(err, shows){
