@@ -4,6 +4,7 @@ var Twitter = require('twitter');
 var app = express();
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
+var Handlebars = require('handlebars');
 var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 mongoose.Promise=global.Promise;
@@ -12,13 +13,24 @@ var _ = require("underscore");
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var search = require('youtube-search');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 // Load envirorment variables
 dotenv.config();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', exphbs({
+  helpers: {
+        nospace: function (value) { return value.split(" ").join(""); },
+        link: function (value) {
+             return "https://www.youtube.com/embed/" + value;
+        }
+    },
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    defaultLayout: 'main',
+
+}));
 app.set('view engine', 'handlebars');
 mongoose.connect(process.env.MONGODB);
 mongoose.connection.on('error', function() {
@@ -41,15 +53,19 @@ var opts = {
 
 let ids = {};
 
-var hbs = exphbs.create({});
+// var hbs = exphbs.create({});
 
-hbs.handlebars.registerHelper('noSpace', function (value) {
-  return value.split(" ").join("");
-});
+// Handlebars.registerHelper('noSpace', function (value) {
+//   return value.split(" ").join("");
+// });
+// hbs.registerHelper('nospace', function (value) {
+//   return value.split(" ").join("");
+// });
 
-hbs.handlebars.registerHelper('link', function (value) {
-  return "https://www.youtube.com/embed/" + value;
-});
+
+// hbs.handlebars.registerHelper('link', function (value) {
+//   return "https://www.youtube.com/embed/" + value;
+// });
 
 
 app.get('/',function(req,res){

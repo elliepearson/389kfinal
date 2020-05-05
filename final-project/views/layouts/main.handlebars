@@ -78,16 +78,14 @@
        <select  onchange="javascript:handleSelect6(this)">
          <option value="">Tweets</option>
          {{#each data}}
-
-         <option value={{noSpace this.title}}>{{this.title}}</option>
+         <option value= {{#nospace this.title}} {{/nospace }}>{{this.title}}</option>
          {{/each}}
        </select>
 
        <select  onchange="javascript:handleSelect7(this)">
          <option value="">Videos</option>
          {{#each data}}
-
-         <option value={{noSpace this.title}}>{{this.title}}</option>
+         <option value= {{#nospace this.title}} {{/nospace }}>{{this.title}}</option>
          {{/each}}
        </select>
  </center>
