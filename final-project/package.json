@@ -9,14 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express-handlebars": "^3.0.2",
+    "handlebars": "4.5.3",
     "mongoose": "^5.9.11",
     "socket.io": "^2.3.0",
     "twitter": "^1.7.1",
     "underscore": "^1.10.2",
-    "youtube-search": "^1.1.4",
-    "handlebars": "4.5.3"
+    "youtube-search": "^1.1.4"
   }
 }
