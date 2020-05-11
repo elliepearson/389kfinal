@@ -61,10 +61,18 @@ window.location = "/show/youtube/" + elm.value;
       <label>Release Year:</label>
       <input id = "year" type="number" name="year" size="50" placeholder="Year..."></textarea>
     </div>
-    <div class="input-field">
+		<div class="input-field">
       <label>Genre:</label>
       <input id = "genre" type="text" name="genre" size="50" placeholder="Genre..."></textarea>
     </div>
+		<div class="input-field">
+      <label>Seasons:</label>
+      <input id = "seasons" type="number" name="seasons" size="50" placeholder="Seasons..."></textarea>
+    </div>
+		<div class="input-field">
+			<label>Show Image:</label>
+			<input id = "url" type="text" name="url" size="50" placeholder="Image URL...">
+		</div>
 		<button onclick="location.href='/show/getShows';">POST</button>
   </form>
 </article>

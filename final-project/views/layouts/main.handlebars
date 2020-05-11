@@ -28,7 +28,7 @@
 
 <center>
   <div class="nav">
-
+<!-- {data}} -->
     <a>
       <div class = "tag">
     <label  for="genres">Find Genre:</label>
@@ -43,7 +43,12 @@
      </div>
 
       </a>
+      <a onclick="window.location.href = '/show/oldest';">
+        <div class = "tag">
 
+      <label>Find Oldest</label>
+    </div>
+       </a>
       <a  id="createNew" onclick="window.location.href = '/show/addShow';">
         <div class = "tag">
 
@@ -56,6 +61,7 @@
         {{#each data}}
         <option value={{this._id}}>{{this.title}}</option>
         {{/each}}
+
       </select>
       <select  onchange="javascript:handleSelect3(this)">
         <option value="">Write Review</option>
@@ -78,7 +84,7 @@
        <select  onchange="javascript:handleSelect6(this)">
          <option value="">Tweets</option>
          {{#each data}}
-         <option value= {{#nospace this.title}} {{/nospace }}>{{this.title}}</option>
+         <option value= {{#nospace this.title}} {{/nospace}}>{{this.title}}</option>
          {{/each}}
        </select>
 
@@ -104,16 +110,22 @@
             var title = $('#title').val();
             var year = $('#year').val();
             var genre = $('#genre').val();
+            var seasons = $('#seasons').val();
+            var url = $('#url').val();
             $('#title').val('');
             $('#year').val('');
             $('#genre').val('');
+            $('#seasons').val('');
+            $('#url').val('');
             $.ajax({
                 type: "POST",
                 url: '/show/addShow',
                 data: {
                     title: title,
                     year: year,
-                    genre: genre
+                    genre: genre,
+                    seasons: seasons,
+                    url: url
                 },
                 success: function(data, status) {
                     console.log(data);
@@ -130,6 +142,10 @@
           article.append($('<hr>'));
           article.append($('<p>').text("Release Year: " + show.year));
           article.append($('<p>').text("Genre: " + show.genre));
+          article.append($('<p>').text("Seasons: " + show.seasons));
+          // article.append($('<p>').text("Image: " + show.url));
+          article.append($('<img>',{src: show.url}));
+
           $('#showList').append(article);
 
         })

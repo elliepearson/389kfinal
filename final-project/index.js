@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var dotenv = require('dotenv');
 mongoose.Promise=global.Promise;
 var TVShow = require('./models/TVShow');
+var data =  require('./data');
 var _ = require("underscore");
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
@@ -53,7 +54,6 @@ var opts = {
 
 let ids = {};
 
-
 app.get('/',function(req,res){
   TVShow.find({}, function(err, shows){
     if(err) throw err;
@@ -61,12 +61,28 @@ app.get('/',function(req,res){
     res.render('home', {
       name: "Home",
       create: true,
-      data: ids,
-      tv: shows
+      search: ids,
+      data: ids
     });
+});
 
+});
+
+
+app.get('/show',function(req,res){
+  TVShow.find({}, function(err, shows){
+    if(err) throw err;
+    ids = shows;
+    res.send(shows);
   });
+});
 
+app.get('/reviews',function(req,res){
+  TVShow.find({}, 'reviews', function(err, shows){
+    if(err) throw err;
+    ids = shows;
+    res.send(shows);
+  });
 });
 
 app.get('/show/description',function(req,res){
@@ -131,6 +147,21 @@ app.get('/show/getShows', function(req, res) {
       create: true,
       data: ids,
       tv: shows
+    });
+  });
+
+});
+
+app.get('/show/oldest', function(req, res) {
+  TVShow.find({}, function(err, shows){
+    if(err) throw err;
+    ids = shows;
+    contents = data.getShows(ids);
+    res.render('home', {
+      name:  "Oldest Show",
+      create: true,
+      data: ids,
+      tv: [contents]
     });
   });
 
@@ -232,6 +263,8 @@ app.post('/show/addShow', function(req, res) {
       title: req.body.title,
       year: parseInt(req.body.year),
       genre: req.body.genre,
+      seasons: parseInt(req.body.seasons),
+      url: req.body.url,
       reviews: []
   });
   tv.save(function(err) {
@@ -298,15 +331,16 @@ io.on('connection', function(socket) {
         io.emit('new show', show);
     });
 
+
     socket.on('disconnect', function() {
         console.log('User has disconnected');
     });
+
+
+
 });
 
 
-// http.listen(3000, function() {
-//     console.log('Listening on port 3000!');
-// });
 
 http.listen(process.env.PORT || 3000, function() {
     console.log('Listening!');

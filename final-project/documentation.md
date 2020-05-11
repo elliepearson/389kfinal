@@ -19,7 +19,9 @@ Data point fields for TV Shows:
 - `Field 1`: Title          `Type: String`
 - `Field 2`: Release Year   `Type: Number`
 - `Field 3`: Genre          `Type: String`
-- `Field 4`: Reviews        `Type: [String]`
+- `Field 4`: Seasons        `Type: Number`
+- `Field 5`: Url            `Type: String`
+- `Field 6`: Reviews        `Type: [String]`
 
 Data point fields for Reviews:
 - `Field 1`: Rating          `Type: Float`
@@ -32,6 +34,8 @@ Schema for TV Show:
     title: String,
     year: Number,
     genre: String,
+    seasons: Number,
+    url: String,
     reviews: [String]
 }
 ```
@@ -48,8 +52,6 @@ Schema for Review:
 ### 2. Add New Data
 
 ##Add Show
-
-HTML form route: `/addShow`
 
 POST endpoint route: `/show/addShow`
 
@@ -68,7 +70,9 @@ var options = {
     form: {
         title: 'The Office',
         year: 2005,
-        genre: "Comedy"
+        genre: "Comedy",
+        seasons: 9,
+        url: "https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_.jpg"
     }
 };
 
@@ -79,8 +83,6 @@ request(options, function (error, response, body) {
 });
 ```
 ##Add Review to Show
-
-HTML form route: `/:id/newReview`
 
 POST endpoint route: `/show/:id/newReview`
 
@@ -111,8 +113,6 @@ request(options, function (error, response, body) {
 
 ##Delete Show
 
-HTML form route: `/:id`
-
 DELETE endpoint route: `/show/:id`
 
 Example Node.js DELETE request to endpoint:
@@ -138,8 +138,6 @@ request(options, function (error, response, body) {
 ```
 
 ##Delete Review
-HTML form route: `/:id/review/delete`
-
 DELETE endpoint route: `/show/:id/review/delete`
 
 Example Node.js DELETE request to endpoint:
@@ -164,13 +162,16 @@ request(options, function (error, response, body) {
 });
 ```
 
-### 3. View Data
+### 4. View Data
 
-GET endpoint route to view shows: `/show/getShows`
-GET endpoint route view show's review: `/show/:id/reviews`
+GET endpoint route to view shows: `/show/`
+GET endpoint route view reviews: `/reviews`
 
+### 5. Search Data
 
-### 4. Navigation Pages
+Search Field: `title`
+
+### 6. Navigation Pages
 
 Navigation Filters
 1. Select a Genre -> `/show/genre/:genre`
@@ -178,7 +179,15 @@ Navigation Filters
 3. Find a Show's Review -> `/show/:id/reviews`
 4. Find Tweets -> `/show/tweets/:title`
 5. Find Videos -> `/show/youtube/:title`
+6. Find Oldest Show -> `/show/oldest`
 
-### 5. npm packages
+### 7. Module used
+
+I used a module export in data.js to find the oldest show.
+
+It exports getData() which returns the data for that show.
+
+
+### 8. npm packages
 1. Youtube-search -> gathers youtube videos with title
 2. Twitter -> finds Tweets with a specific query
