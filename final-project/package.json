@@ -18,7 +18,7 @@
     "mongoose": "^5.9.11",
     "socket.io": "^2.3.0",
     "twitter": "^1.7.1",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "youtube-search": "^1.1.4"
   }
 }
